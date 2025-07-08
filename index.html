@@ -16,8 +16,7 @@
         *, *::before, *::after {
             box-sizing: border-box;
         }
-
-        :root {
+         :root {
             /* --- SECULIFE BRAND COLORS TARGETED --- */
             --primary-color: #00A99D; /* SecuLife's primary teal */
             --primary-color-hover: #008f84; /* Slightly darker primary on hover */
@@ -47,8 +46,7 @@
             margin: 40px auto;
             padding: 20px;
         }
-
-        /* --- Header Styles --- */
+         /* --- Header Styles --- */
         header {
             text-align: center;
             margin-bottom: 30px; /* Increased margin for header */
@@ -79,8 +77,7 @@
         header p a:hover {
             color: var(--primary-color-hover);
         }
-
-        /* --- Print Button --- */
+         /* --- Print Button --- */
         .print-button {
             position: absolute; top: 0; right: 0; cursor: pointer; background: none;
             border: 1px solid var(--border-color); border-radius: 5px; padding: 8px 12px;
@@ -90,8 +87,7 @@
         }
         .print-button:hover { background-color: #f0f0f0; border-color: #dcdcdc; }
         .print-button svg { width: 18px; height: 18px; }
-
-        /* --- Introduction Grid --- */
+         /* --- Introduction Grid --- */
         .intro-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -123,8 +119,7 @@
             transform: scale(1.02); /* Slightly less aggressive scale */
             background-color: var(--primary-color-hover); /* Darker primary on hover */
         }
-
-        /* --- Executive Summary --- */
+         /* --- Executive Summary --- */
         .executive-summary {
             background-color: var(--light-primary-bg); /* Use defined variable */
             border-left: 5px solid var(--primary-color);
@@ -149,8 +144,7 @@
             margin-bottom: 0; /* Remove bottom margin for the last paragraph in summary */
             font-size: 1.05em; /* Slightly larger text for summary */
         }
-
-        /* --- General Card & Heading Styles --- */
+         /* --- General Card & Heading Styles --- */
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -182,8 +176,7 @@
         p {
             margin-bottom: 1em; /* Consistent paragraph spacing */
         }
-
-        /* --- List Styles (Refactored for Lucide Icons) --- */
+         /* --- List Styles (Refactored for Lucide Icons) --- */
         ul {
             list-style-type: none;
             padding-left: 0;
@@ -213,8 +206,7 @@
         .opportunity li .lucide {
             color: var(--success-color); /* Blue for opportunity/rocket icon */
         }
-
-        /* --- Review Quote --- */
+         /* --- Review Quote --- */
         .review-quote {
             border-left: 3px solid var(--warning-color); /* Use variable */
             padding-left: 15px;
@@ -226,8 +218,7 @@
             padding: 15px;
             border-radius: 4px;
         }
-
-        /* --- Details/Summary (Accordion) --- */
+         /* --- Details/Summary (Accordion) --- */
         details {
             margin-top: 20px; /* Increased margin */
             border: 1px solid var(--border-color);
@@ -252,8 +243,7 @@
         details[open] summary::before {
             content: '- '; /* Custom collapse icon */
         }
-
-        /* --- Footer --- */
+         /* --- Footer --- */
         footer {
             text-align: center;
             margin-top: 50px;
@@ -265,8 +255,7 @@
         footer p {
             margin-bottom: 0; /* Remove default paragraph margin */
         }
-
-        /* --- Tags --- */
+         /* --- Tags --- */
         .tag {
             display: inline-block;
             background-color: var(--light-primary-bg); /* Use defined variable */
@@ -279,8 +268,7 @@
             margin-bottom: 8px; /* Space for wrapping tags */
             white-space: nowrap; /* Prevent tags from breaking */
         }
-
-        /* --- Responsive Adjustments --- */
+         /* --- Responsive Adjustments --- */
         @media screen and (max-width: 768px) {
             .intro-grid {
                 grid-template-columns: 1fr;
@@ -309,8 +297,7 @@
             h2 { font-size: 1.6em; margin-bottom: 15px; }
             h3 { font-size: 1.2em; margin-top: 20px; margin-bottom: 10px; }
         }
-
-        /* --- Print Styles --- */
+         /* --- Print Styles --- */
         @media print {
             body {
                 background-color: #FFFFFF;
@@ -352,10 +339,10 @@
             <h1>Strategic Analysis & Growth Plan</h1>
             <p>Prepared for: VAXPH</p>
             <p>Prepared by: <a href="https://wescode.vercel.app/" target="_blank" rel="noopener noreferrer">John Wesley Quintero</a></p>
+            <p>Relevant Appendix: <a href="sentiment-analysis.html" target="_blank" rel="noopener noreferrer">Detailed Sentiment Analysis</a></p>
             <p>Brand Focus: <strong>SecuLife & The Hardware/Service Ecosystem</strong></p>
         </header>
-
-        <div class="intro-grid">
+         <div class="intro-grid">
             <div class="executive-summary">
                 <h2>Executive Summary</h2>
                 <p>SecuLife has built a powerful, emotionally resonant hardware brand focused on safety and peace of mind. The significant opportunity lies in further enhancing this premium brand image by aligning the entire product and service ecosystem. This report outlines an Amazon-centric strategy to fortify the brand's online presence, improve customer trust, increase conversion rates, and unlock new revenue through strategic Amazon bundling and optimized listing practices.</p>
@@ -365,13 +352,11 @@
                 <a href="https://a.co/d/epX1jEz" target="_blank" class="amazon-button">View Live Amazon Listing</a>
             </div>
         </div>
-
-        <section class="card">
+         <section class="card">
             <h2>Methodology</h2>
             <p>This analysis was conducted using resourceful market research techniques, combining data from free-tier SaaS tools, manual "guerrilla" research via Amazon's search interface, and in-depth sentiment analysis of over 50 customer reviews. This multi-faceted approach provides a comprehensive view of technical performance, market positioning, and direct customer feedback.</p>
         </section>
-
-        <section class="card">
+         <section class="card">
             <h2>Key Finding #1: The "Hardware + Service" Ecosystem Opportunity</h2>
             <h3>Aligning the Experience to Maximize Trust</h3>
             <ul class="threat">
@@ -380,8 +365,7 @@
                 <li><i data-lucide="alert-triangle"></i><span><strong>Hardware Pain Points:</strong> Even for the hardware, recurring complaints about **poor battery life** and **proprietary chargers** offer a direct path to improving the product and listing to better meet customer expectations.</span></li>
             </ul>
         </section>
-
-        <section class="card">
+         <section class="card">
             <h2>Key Finding #2: Customer Voice & Unmet Needs</h2>
             <h3>Sentiment Analysis of Customer Reviews</h3>
             <ul class="opportunity">
@@ -390,16 +374,14 @@
                 <li><i data-lucide="rocket"></i><span><strong>The Biggest Hardware Flaw:</strong> The most common complaint is **poor battery life** and issues with the proprietary charger.</span></li>
                 <li><i data-lucide="rocket"></i><span><strong>The Biggest Service Flaw:</strong> The most toxic reviews center around **surprise fees, difficult cancellations, and perceived security risks** with credit card info.</span></li>
             </ul>
-
-            <details>
+             <details>
                 <summary>View Sample Customer Reviews</summary>
                 <blockquote class="review-quote">"I bought this tracker for my Mom who has Alzheimers... This tracker gives me piece of mind that I can see where she is at when I at work."</blockquote>
                 <blockquote class="review-quote">"my favorite feature is that I can call the tracker and I have it set to automatically answer so she doesnt have to look for a button to press."</blockquote>
                 <blockquote class="review-quote">"When you no longer want to use the device, they will charge you a $125 cancelation fee."</blockquote>
             </details>
         </section>
-
-        <section class="card">
+         <section class="card">
             <h2>Strategic Recommendations: An Amazon-Centric Growth Plan</h2>
             <h3>Phase 1: Fortify the Foundation (Days 1-30)</h3>
             <ul>
@@ -413,8 +395,7 @@
                 <li><i data-lucide="check-circle-2"></i><span><strong>Address the Battery Issue with Transparency:</strong> Add clear copy to the listing setting realistic expectations for battery life ("Charge nightly for all-day peace of mind") to prevent negative reviews.</span></li>
             </ul>
         </section>
-
-        <footer>
+         <footer>
             <p>By strategically focusing on the Amazon listing, aligning the ecosystem experience, and addressing customer feedback directly on the platform, we can significantly enhance SecuLife's market position and drive substantial growth. I am ready to lead this charge.</p>
         </footer>
     </div>
