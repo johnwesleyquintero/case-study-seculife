@@ -11,323 +11,7 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%2300A99D'/><text x='50%' y='60%' font-family='Arial, sans-serif' font-size='70' fill='white' text-anchor='middle' dominant-baseline='middle'>V</text></svg>">
     <!-- Lucide Icons Script -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        /* Define consistent box model for all elements */
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
-         :root {
-            /* --- SECULIFE BRAND COLORS TARGETED --- */
-            --primary-color: #00A99D; /* SecuLife's primary teal */
-            --primary-color-hover: #008f84; /* Slightly darker primary on hover */
-            --light-primary-text: #0F766E; /* Darker teal for text on light backgrounds */
-            --light-primary-bg: #E0F2F1; /* A very light teal for soft backgrounds like tags or summary */
-            /* --- END BRAND COLORS --- */
-            --secondary-color: #111827; /* Dark charcoal for primary headings */
-            --text-color: #374151; /* Default grey for body text */
-            --soft-text-color: #6B7280; /* Lighter grey for subtle text */
-            --bg-color: #F9FAFB; /* Light grey for overall page background */
-            --card-bg: #FFFFFF; /* White for card backgrounds */
-            --border-color: #E5E7EB; /* Light grey for borders */
-            --warning-color: #FCA5A5; /* Light red for warning outlines */
-            --attention-color: #f0c300; /* Yellow for attention-grabbing icons/text */
-            --success-color: #3498db; /* Blue for positive/opportunity icons */
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-         /* --- Header Styles --- */
-        header {
-            text-align: center;
-            margin-bottom: 30px; /* Increased margin for header */
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 20px;
-            position: relative;
-        }
-        header h1 {
-            color: var(--secondary-color);
-            font-size: 2.5em;
-            margin: 0; /* Ensures no top margin on H1 */
-            margin-bottom: 8px; /* Spacing below H1 */
-            line-height: 1.2;
-            letter-spacing: -0.02em; /* Slightly tighter for headings */
-            font-weight: 700; /* More prominent for H1 */
-        }
-        header p {
-            color: var(--soft-text-color); /* Use variable */
-            font-size: 1.05em; /* Slightly adjusted font size */
-            margin-top: 5px;
-            margin-bottom: 5px; /* Consistent margin for header paragraphs */
-        }
-        header p a {
-            color: var(--primary-color); /* Style for links in the header paragraphs */
-            text-decoration: underline;
-            font-weight: 500;
-        }
-        header p a:hover {
-            color: var(--primary-color-hover);
-        }
-         /* --- Print Button --- */
-        .print-button {
-            position: absolute; top: 0; right: 0; cursor: pointer; background: none;
-            border: 1px solid var(--border-color); border-radius: 5px; padding: 8px 12px;
-            display: flex; align-items: center; gap: 8px; color: var(--text-color);
-            transition: background-color 0.2s, border-color 0.2s;
-            font-size: 0.9em; /* Smaller font size for button */
-        }
-        .print-button:hover { background-color: #f0f0f0; border-color: #dcdcdc; }
-        .print-button svg { width: 18px; height: 18px; }
-         /* --- Introduction Grid --- */
-        .intro-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 30px;
-            align-items: center;
-            margin-bottom: 40px;
-        }
-        .product-showcase img {
-            width: 100%;
-            max-width: 250px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            display: block;
-            margin: 0 auto;
-        }
-        .amazon-button {
-            display: block;
-            text-align: center;
-            margin-top: 20px; /* Increased margin */
-            padding: 12px 15px; /* Increased padding for a more prominent button */
-            background-color: var(--primary-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: transform 0.2s, background-color 0.2s;
-        }
-        .amazon-button:hover {
-            transform: scale(1.02); /* Slightly less aggressive scale */
-            background-color: var(--primary-color-hover); /* Darker primary on hover */
-        }
-         /* --- Executive Summary --- */
-        .executive-summary {
-            background-color: var(--light-primary-bg); /* Use defined variable */
-            border-left: 5px solid var(--primary-color);
-            padding: 25px; /* Increased padding */
-            border-radius: 5px;
-            height: 100%;
-            display: flex; /* Added flex for better content alignment */
-            flex-direction: column;
-            justify-content: center;
-        }
-        .executive-summary h2 {
-            color: var(--secondary-color);
-            margin-top: 0;
-            margin-bottom: 15px; /* Consistent margin for h2 within summary */
-            font-size: 1.5em; /* Specific font size for summary h2 */
-            border-bottom: none; /* No border for h2 in summary */
-            padding-bottom: 0;
-            letter-spacing: -0.01em;
-            font-weight: 600;
-        }
-        .executive-summary p {
-            margin-bottom: 0; /* Remove bottom margin for the last paragraph in summary */
-            font-size: 1.05em; /* Slightly larger text for summary */
-        }
-         /* --- General Card & Heading Styles --- */
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.06); /* Slightly more prominent shadow */
-        }
-        h2 {
-            color: var(--secondary-color);
-            font-size: 1.8em;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 10px;
-            margin-top: 0; /* Remove default browser top margin */
-            margin-bottom: 20px; /* Standardized bottom margin for H2 */
-            line-height: 1.3;
-            letter-spacing: -0.02em;
-            font-weight: 600;
-        }
-        h3 {
-            color: var(--secondary-color);
-            font-size: 1.4em;
-            margin-top: 25px; /* Standardized top margin for H3 */
-            margin-bottom: 15px; /* Standardized bottom margin for H3 */
-            line-height: 1.3;
-            letter-spacing: -0.01em;
-            font-weight: 500; /* Slightly less bold than H2 */
-        }
-        p {
-            margin-bottom: 1em; /* Consistent paragraph spacing */
-        }
-         /* --- List Styles (Refactored for Lucide Icons) --- */
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-            margin-bottom: 1em; /* Add bottom margin to UL */
-        }
-        li {
-            display: flex;
-            align-items: flex-start; /* Align icon to the top of the text */
-            gap: 12px; /* Space between icon and text */
-            margin-bottom: 12px;
-            line-height: 1.5;
-        }
-        li strong {
-            font-weight: 600; /* Make bold text within list items stand out */
-        }
-        /* Style the Lucide icon SVG */
-        li .lucide {
-            flex-shrink: 0; /* Prevent icon from shrinking */
-            width: 20px;
-            height: 20px;
-            margin-top: 3px; /* Fine-tune vertical alignment with text */
-            color: var(--primary-color); /* Default checkmark color */
-        }
-        .threat li .lucide {
-            color: var(--attention-color); /* Yellow for threat/warning icon */
-        }
-        .opportunity li .lucide {
-            color: var(--success-color); /* Blue for opportunity/rocket icon */
-        }
-         /* --- Review Quote --- */
-        .review-quote {
-            border-left: 3px solid var(--warning-color); /* Use variable */
-            padding-left: 15px;
-            font-style: italic;
-            color: var(--text-color); /* Use main text color */
-            margin: 15px 0;
-            line-height: 1.5;
-            background-color: #FEF3F2; /* Light red background for quotes in this section */
-            padding: 15px;
-            border-radius: 4px;
-        }
-         /* --- Details/Summary (Accordion) --- */
-        details {
-            margin-top: 20px; /* Increased margin */
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            padding: 10px 15px; /* Added horizontal padding */
-        }
-        summary {
-            cursor: pointer;
-            font-weight: bold;
-            color: var(--primary-color);
-            padding: 5px 0; /* Add some vertical padding to summary text */
-            outline: none; /* Remove outline on focus */
-        }
-        summary::-webkit-details-marker { display: none; } /* Remove default triangle for custom styling */
-        summary::before {
-            content: '+ '; /* Custom expand icon */
-            display: inline-block;
-            margin-right: 8px;
-            font-weight: normal;
-            color: var(--text-color);
-        }
-        details[open] summary::before {
-            content: '- '; /* Custom collapse icon */
-        }
-         /* --- Footer --- */
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            color: var(--soft-text-color); /* Use variable */
-            font-size: 0.9em;
-            padding-top: 20px; /* Add padding for visual separation */
-            border-top: 1px solid var(--border-color);
-        }
-        footer p {
-            margin-bottom: 0; /* Remove default paragraph margin */
-        }
-         /* --- Tags --- */
-        .tag {
-            display: inline-block;
-            background-color: var(--light-primary-bg); /* Use defined variable */
-            color: var(--light-primary-text); /* Use defined variable */
-            padding: 3px 10px;
-            border-radius: 15px;
-            font-size: 0.85em;
-            font-weight: 500;
-            margin-right: 8px; /* Space between tags if multiple */
-            margin-bottom: 8px; /* Space for wrapping tags */
-            white-space: nowrap; /* Prevent tags from breaking */
-        }
-         /* --- Responsive Adjustments --- */
-        @media screen and (max-width: 768px) {
-            .intro-grid {
-                grid-template-columns: 1fr;
-            }
-            .container {
-                margin: 20px auto;
-                padding: 15px;
-            }
-            header {
-                margin-bottom: 20px;
-                padding-bottom: 15px;
-            }
-            .print-button {
-                position: static; /* Stack on smaller screens */
-                width: 100%;
-                margin-bottom: 15px;
-                justify-content: center;
-            }
-            .executive-summary {
-                padding: 20px; /* Adjust padding for smaller screens */
-            }
-            .card {
-                padding: 20px;
-                margin-bottom: 20px;
-            }
-            h2 { font-size: 1.6em; margin-bottom: 15px; }
-            h3 { font-size: 1.2em; margin-top: 20px; margin-bottom: 10px; }
-        }
-         /* --- Print Styles --- */
-        @media print {
-            body {
-                background-color: #FFFFFF;
-                font-size: 10pt;
-                color: #000; /* Ensure black text for print */
-            }
-            .container { margin: 0; padding: 0; max-width: 100%; }
-            .print-button, details summary, .amazon-button { display: none; }
-            .card, .executive-summary, .intro-grid {
-                box-shadow: none;
-                border: 1px solid #ccc;
-                page-break-inside: avoid;
-                margin-bottom: 15px; /* Reduce margin for print */
-                padding: 15px; /* Reduce padding for print */
-            }
-            header { border-bottom: 2px solid #000; margin-bottom: 20px; }
-            h1, h2, h3 { color: #000 !important; margin-top: 10px; margin-bottom: 10px; } /* Ensure black and adjusted margins */
-            a { text-decoration: none; color: #000; }
-            .tag { border: 1px solid #ccc; background-color: #fff; color: #000; padding: 2px 8px; }
-            ul { margin-bottom: 0.5em; }
-            li { margin-bottom: 8px; }
-            /* Ensure Lucide icons print in black */
-            li .lucide {
-                color: #000 !important;
-            }
-            p { margin-bottom: 0.5em; }
-            .review-quote { border-left: 3px solid #ccc; color: #000; background-color: #fff; }
-            footer { border-top: 1px solid #ccc; color: #000; margin-top: 30px; }
-        }
-    </style>
+    <style>         /* Define consistent box model for all elements */         *, *::before, *::after {             box-sizing: border-box;         }          :root {             /* --- SECULIFE BRAND COLORS TARGETED --- */             --primary-color: #00A99D; /* SecuLife's primary teal */             --primary-color-hover: #008f84; /* Slightly darker primary on hover */             --light-primary-text: #0F766E; /* Darker teal for text on light backgrounds */             --light-primary-bg: #E0F2F1; /* A very light teal for soft backgrounds like tags or summary */             /* --- END BRAND COLORS --- */             --secondary-color: #111827; /* Dark charcoal for primary headings */             --text-color: #374151; /* Default grey for body text */             --soft-text-color: #6B7280; /* Lighter grey for subtle text */             --bg-color: #F9FAFB; /* Light grey for overall page background */             --card-bg: #FFFFFF; /* White for card backgrounds */             --border-color: #E5E7EB; /* Light grey for borders */             --warning-color: #FCA5A5; /* Light red for warning outlines */             --attention-color: #f0c300; /* Yellow for attention-grabbing icons/text */             --success-color: #3498db; /* Blue for positive/opportunity icons */         }         body {             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;             background-color: var(--bg-color);             color: var(--text-color);             line-height: 1.6;             margin: 0;             padding: 0;         }         .container {             max-width: 900px;             margin: 40px auto;             padding: 20px;         }          /* --- Header Styles --- */         header {             text-align: center;             margin-bottom: 30px; /* Increased margin for header */             border-bottom: 1px solid var(--border-color);             padding-bottom: 20px;             position: relative;         }         header h1 {             color: var(--secondary-color);             font-size: 2.5em;             margin: 0; /* Ensures no top margin on H1 */             margin-bottom: 8px; /* Spacing below H1 */             line-height: 1.2;             letter-spacing: -0.02em; /* Slightly tighter for headings */             font-weight: 700; /* More prominent for H1 */         }         header p {             color: var(--soft-text-color); /* Use variable */             font-size: 1.05em; /* Slightly adjusted font size */             margin-top: 5px;             margin-bottom: 5px; /* Consistent margin for header paragraphs */         }         header p a {             color: var(--primary-color); /* Style for links in the header paragraphs */             text-decoration: underline;             font-weight: 500;         }         header p a:hover {             color: var(--primary-color-hover);         }          /* --- Print Button --- */         .print-button {             position: absolute; top: 0; right: 0; cursor: pointer; background: none;             border: 1px solid var(--border-color); border-radius: 5px; padding: 8px 12px;             display: flex; align-items: center; gap: 8px; color: var(--text-color);             transition: background-color 0.2s, border-color 0.2s;             font-size: 0.9em; /* Smaller font size for button */         }         .print-button:hover { background-color: #f0f0f0; border-color: #dcdcdc; }         .print-button svg { width: 18px; height: 18px; }          /* --- Introduction Grid --- */         .intro-grid {             display: grid;             grid-template-columns: 2fr 1fr;             gap: 30px;             align-items: center;             margin-bottom: 40px;         }         .product-showcase img {             width: 100%;             max-width: 250px;             border-radius: 8px;             border: 1px solid var(--border-color);             display: block;             margin: 0 auto;         }         .amazon-button {             display: block;             text-align: center;             margin-top: 20px; /* Increased margin */             padding: 12px 15px; /* Increased padding for a more prominent button */             background-color: var(--primary-color);             color: white;             text-decoration: none;             border-radius: 5px;             font-weight: bold;             transition: transform 0.2s, background-color 0.2s;         }         .amazon-button:hover {             transform: scale(1.02); /* Slightly less aggressive scale */             background-color: var(--primary-color-hover); /* Darker primary on hover */         }          /* --- Executive Summary --- */         .executive-summary {             background-color: var(--light-primary-bg); /* Use defined variable */             border-left: 5px solid var(--primary-color);             padding: 25px; /* Increased padding */             border-radius: 5px;             height: 100%;             display: flex; /* Added flex for better content alignment */             flex-direction: column;             justify-content: center;         }         .executive-summary h2 {             color: var(--secondary-color);             margin-top: 0;             margin-bottom: 15px; /* Consistent margin for h2 within summary */             font-size: 1.5em; /* Specific font size for summary h2 */             border-bottom: none; /* No border for h2 in summary */             padding-bottom: 0;             letter-spacing: -0.01em;             font-weight: 600;         }         .executive-summary p {             margin-bottom: 0; /* Remove bottom margin for the last paragraph in summary */             font-size: 1.05em; /* Slightly larger text for summary */         }          /* --- General Card & Heading Styles --- */         .card {             background-color: var(--card-bg);             border: 1px solid var(--border-color);             border-radius: 8px;             padding: 25px;             margin-bottom: 30px;             box-shadow: 0 4px 10px rgba(0,0,0,0.06); /* Slightly more prominent shadow */         }         h2 {             color: var(--secondary-color);             font-size: 1.8em;             border-bottom: 2px solid var(--primary-color);             padding-bottom: 10px;             margin-top: 0; /* Remove default browser top margin */             margin-bottom: 20px; /* Standardized bottom margin for H2 */             line-height: 1.3;             letter-spacing: -0.02em;             font-weight: 600;         }         h3 {             color: var(--secondary-color);             font-size: 1.4em;             margin-top: 25px; /* Standardized top margin for H3 */             margin-bottom: 15px; /* Standardized bottom margin for H3 */             line-height: 1.3;             letter-spacing: -0.01em;             font-weight: 500; /* Slightly less bold than H2 */         }         p {             margin-bottom: 1em; /* Consistent paragraph spacing */         }          /* --- List Styles (Refactored for Lucide Icons) --- */         ul {             list-style-type: none;             padding-left: 0;             margin-bottom: 1em; /* Add bottom margin to UL */         }         li {             display: flex;             align-items: flex-start; /* Align icon to the top of the text */             gap: 12px; /* Space between icon and text */             margin-bottom: 12px;             line-height: 1.5;         }         li strong {             font-weight: 600; /* Make bold text within list items stand out */         }         /* Style the Lucide icon SVG */         li .lucide {             flex-shrink: 0; /* Prevent icon from shrinking */             width: 20px;             height: 20px;             margin-top: 3px; /* Fine-tune vertical alignment with text */             color: var(--primary-color); /* Default checkmark color */         }         .threat li .lucide {             color: var(--attention-color); /* Yellow for threat/warning icon */         }         .opportunity li .lucide {             color: var(--success-color); /* Blue for opportunity/rocket icon */         }          /* --- Review Quote --- */         .review-quote {             border-left: 3px solid var(--warning-color); /* Use variable */             padding-left: 15px;             font-style: italic;             color: var(--text-color); /* Use main text color */             margin: 15px 0;             line-height: 1.5;             background-color: #FEF3F2; /* Light red background for quotes in this section */             padding: 15px;             border-radius: 4px;         }          /* --- Details/Summary (Accordion) --- */         details {             margin-top: 20px; /* Increased margin */             border: 1px solid var(--border-color);             border-radius: 5px;             padding: 10px 15px; /* Added horizontal padding */         }         summary {             cursor: pointer;             font-weight: bold;             color: var(--primary-color);             padding: 5px 0; /* Add some vertical padding to summary text */             outline: none; /* Remove outline on focus */         }         summary::-webkit-details-marker { display: none; } /* Remove default triangle for custom styling */         summary::before {             content: '+ '; /* Custom expand icon */             display: inline-block;             margin-right: 8px;             font-weight: normal;             color: var(--text-color);         }         details[open] summary::before {             content: '- '; /* Custom collapse icon */         }          /* --- Footer --- */         footer {             text-align: center;             margin-top: 50px;             color: var(--soft-text-color); /* Use variable */             font-size: 0.9em;             padding-top: 20px; /* Add padding for visual separation */             border-top: 1px solid var(--border-color);         }         footer p {             margin-bottom: 0; /* Remove default paragraph margin */         }          /* --- Tags --- */         .tag {             display: inline-block;             background-color: var(--light-primary-bg); /* Use defined variable */             color: var(--light-primary-text); /* Use defined variable */             padding: 3px 10px;             border-radius: 15px;             font-size: 0.85em;             font-weight: 500;             margin-right: 8px; /* Space between tags if multiple */             margin-bottom: 8px; /* Space for wrapping tags */             white-space: nowrap; /* Prevent tags from breaking */         }          /* --- Responsive Adjustments --- */         @media screen and (max-width: 768px) {             .intro-grid {                 grid-template-columns: 1fr;             }             .container {                 margin: 20px auto;                 padding: 15px;             }             header {                 margin-bottom: 20px;                 padding-bottom: 15px;             }             .print-button {                 position: static; /* Stack on smaller screens */                 width: 100%;                 margin-bottom: 15px;                 justify-content: center;             }             .executive-summary {                 padding: 20px; /* Adjust padding for smaller screens */             }             .card {                 padding: 20px;                 margin-bottom: 20px;             }             h2 { font-size: 1.6em; margin-bottom: 15px; }             h3 { font-size: 1.2em; margin-top: 20px; margin-bottom: 10px; }         }          /* --- Print Styles --- */         @media print {             body {                 background-color: #FFFFFF;                 font-size: 10pt;                 color: #000; /* Ensure black text for print */             }             .container { margin: 0; padding: 0; max-width: 100%; }             .print-button, details summary, .amazon-button { display: none; }             .card, .executive-summary, .intro-grid {                 box-shadow: none;                 border: 1px solid #ccc;                 page-break-inside: avoid;                 margin-bottom: 15px; /* Reduce margin for print */                 padding: 15px; /* Reduce padding for print */             }             header { border-bottom: 2px solid #000; margin-bottom: 20px; }             h1, h2, h3 { color: #000 !important; margin-top: 10px; margin-bottom: 10px; } /* Ensure black and adjusted margins */             a { text-decoration: none; color: #000; }             .tag { border: 1px solid #ccc; background-color: #fff; color: #000; padding: 2px 8px; }             ul { margin-bottom: 0.5em; }             li { margin-bottom: 8px; }             /* Ensure Lucide icons print in black */             li .lucide {                 color: #000 !important;             }             p { margin-bottom: 0.5em; }             .review-quote { border-left: 3px solid #ccc; color: #000; background-color: #fff; }             footer { border-top: 1px solid #ccc; color: #000; margin-top: 30px; }         }     </style>
 </head>
 <body>
     <div class="container">
@@ -340,9 +24,11 @@
             <p>Prepared for: VAXPH</p>
             <p>Prepared by: <a href="https://wescode.vercel.app/" target="_blank" rel="noopener noreferrer">John Wesley Quintero</a></p>
             <p>Relevant Appendix: <a href="sentiment-analysis.html" target="_blank" rel="noopener noreferrer">Detailed Sentiment Analysis</a></p>
+            <p>Relevant Appendix: <a href="keyword-analysis.html" target="_blank" rel="noopener noreferrer">Keyword Analysis</a></p>
             <p>Brand Focus: <strong>SecuLife & The Hardware/Service Ecosystem</strong></p>
         </header>
-         <div class="intro-grid">
+
+        <div class="intro-grid">
             <div class="executive-summary">
                 <h2>Executive Summary</h2>
                 <p>SecuLife has built a powerful, emotionally resonant hardware brand focused on safety and peace of mind. The significant opportunity lies in further enhancing this premium brand image by aligning the entire product and service ecosystem. This report outlines an Amazon-centric strategy to fortify the brand's online presence, improve customer trust, increase conversion rates, and unlock new revenue through strategic Amazon bundling and optimized listing practices.</p>
@@ -352,11 +38,13 @@
                 <a href="https://a.co/d/epX1jEz" target="_blank" class="amazon-button">View Live Amazon Listing</a>
             </div>
         </div>
-         <section class="card">
+
+        <section class="card">
             <h2>Methodology</h2>
             <p>This analysis was conducted using resourceful market research techniques, combining data from free-tier SaaS tools, manual "guerrilla" research via Amazon's search interface, and in-depth sentiment analysis of over 30 customer reviews. This multi-faceted approach provides a comprehensive view of technical performance, market positioning, and direct customer feedback.</p>
         </section>
-         <section class="card">
+
+        <section class="card">
             <h2>Key Finding #1: The "Hardware + Service" Ecosystem Opportunity</h2>
             <h3>Aligning the Experience to Maximize Trust</h3>
             <ul class="threat">
@@ -365,7 +53,8 @@
                 <li><i data-lucide="alert-triangle"></i><span><strong>Hardware Pain Points:</strong> Even for the hardware, recurring complaints about **poor battery life** and **proprietary chargers** offer a direct path to improving the product and listing to better meet customer expectations.</span></li>
             </ul>
         </section>
-         <section class="card">
+
+        <section class="card">
             <h2>Key Finding #2: Customer Voice & Unmet Needs</h2>
             <h3>Sentiment Analysis of Customer Reviews</h3>
             <ul class="opportunity">
@@ -374,14 +63,16 @@
                 <li><i data-lucide="rocket"></i><span><strong>The Biggest Hardware Flaw:</strong> The most common complaint is **poor battery life** and issues with the proprietary charger.</span></li>
                 <li><i data-lucide="rocket"></i><span><strong>The Biggest Service Flaw:</strong> The most toxic reviews center around **surprise fees, difficult cancellations, and perceived security risks** with credit card info.</span></li>
             </ul>
-             <details>
+
+            <details>
                 <summary>View Sample Customer Reviews</summary>
                 <blockquote class="review-quote">"I bought this tracker for my Mom who has Alzheimers... This tracker gives me piece of mind that I can see where she is at when I at work."</blockquote>
                 <blockquote class="review-quote">"my favorite feature is that I can call the tracker and I have it set to automatically answer so she doesnt have to look for a button to press."</blockquote>
                 <blockquote class="review-quote">"When you no longer want to use the device, they will charge you a $125 cancelation fee."</blockquote>
             </details>
         </section>
-         <section class="card">
+
+        <section class="card">
             <h2>Strategic Recommendations: An Amazon-Centric Growth Plan</h2>
             <h3>Phase 1: Fortify the Foundation (Days 1-30)</h3>
             <ul>
@@ -395,7 +86,8 @@
                 <li><i data-lucide="check-circle-2"></i><span><strong>Address the Battery Issue with Transparency:</strong> Add clear copy to the listing setting realistic expectations for battery life ("Charge nightly for all-day peace of mind") to prevent negative reviews.</span></li>
             </ul>
         </section>
-         <footer>
+
+        <footer>
             <p>By strategically focusing on the Amazon listing, aligning the ecosystem experience, and addressing customer feedback directly on the platform, we can significantly enhance SecuLife's market position and drive substantial growth. I am ready to lead this charge.</p>
         </footer>
     </div>
