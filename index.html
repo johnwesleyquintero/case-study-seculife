@@ -82,14 +82,31 @@
 
         /* --- Print Button --- */
         .print-button {
-            position: absolute; top: 0; right: 0; cursor: pointer; background: none;
-            border: 1px solid var(--border-color); border-radius: 5px; padding: 8px 12px;
-            display: flex; align-items: center; gap: 8px; color: var(--text-color);
-            transition: background-color 0.2s, border-color 0.2s;
-            font-size: 0.9em; /* Smaller font size for button */
+            cursor: pointer;
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: white;
+            font-weight: 500;
+            transition: background-color 0.2s, transform 0.2s;
+            font-size: 0.9em;
+            width: 100%;
+            margin-top: 10px;
         }
-        .print-button:hover { background-color: #f0f0f0; border-color: #dcdcdc; }
-        .print-button svg { width: 18px; height: 18px; }
+        .print-button:hover {
+            background-color: var(--primary-color-hover);
+            transform: translateY(-2px);
+        }
+        .print-button svg {
+            width: 18px;
+            height: 18px;
+            stroke: white;
+        }
 
         /* --- Introduction Grid --- */
         .intro-grid {
@@ -345,10 +362,6 @@
 <body>
     <div class="container">
         <header>
-            <button class="print-button" onclick="window.print()">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a8.25 8.25 0 018.25-8.25H21M7.5 21H3.75A1.75 1.75 0 012 19.25V8.75A1.75 1.75 0 013.75 7H18a2.25 2.25 0 012.25 2.25v.193m-16.5 5.813c.24.03.48.062.72.096C5.065 15.245 5.754 15 6.5 15c.828 0 1.5.286 2.25.75 1.125.722 2.25.722 3.375 0s2.25-.722 3.375 0c.75.464 1.425.75 2.25.75.828 0 1.5-.286 2.25-.75 1.125-.722 2.25-.722 3.375 0s2.25.722 3.375 0M12 18.75a.75.75 0 100-1.5.75.75 0 000 1.5z" /></svg>
-                Print / Save as PDF
-            </button>
             <h1>Strategic Analysis & Growth Plan</h1>
             <p>Prepared for: VAXPH</p>
             <p>Prepared by: <a href="https://wescode.vercel.app/" target="_blank" rel="noopener noreferrer">John Wesley Quintero</a></p>
@@ -358,11 +371,23 @@
         <div class="intro-grid">
             <div class="executive-summary">
                 <h2>Executive Summary</h2>
-                <p>SecuLife has built a powerful, emotionally resonant hardware brand focused on safety and peace of mind. The significant opportunity lies in further enhancing this premium brand image by aligning the entire product and service ecosystem. This report outlines an Amazon-centric strategy to fortify the brand's online presence, improve customer trust, increase conversion rates, and unlock new revenue through strategic Amazon bundling and optimized listing practices.</p>
+                <p>
+                    This analysis reveals that SecuLife's core strength is providing <strong>"peace of mind"</strong> to its primary customer: the caregiver for a parent with Alzheimer's or Dementia. The beloved <strong>"auto-answer" speakerphone</strong> is the killer feature driving positive sentiment.
+                </p>
+                <p>
+                    However, significant strategic risks exist. Negative sentiment is concentrated on <strong>poor battery life</strong> and service-level issues like <strong>surprise cancellation fees</strong>, which tarnish the premium hardware brand. Keyword analysis shows a massive, untapped demand for <strong>"no monthly fee"</strong> solutions, representing a key market objection to address. The storefront data confirms moderate satisfaction (avg. 3.5 stars) and highlights inventory challenges that need attention.
+                </p>
+                <p>
+                    The primary opportunity is to align the entire service experience with the hardware's promise, address battery life transparently, and strategically position SecuLife against competitors like "Life Alert" by emphasizing its unique value proposition for the caregiver persona.
+                </p>
             </div>
             <div class="product-showcase">
                 <img src="https://m.media-amazon.com/images/I/71oETRYRZ5L._AC_SL1500_.jpg" alt="SecuLife Medical Alert System for Seniors">
                 <a href="https://a.co/d/epX1jEz" target="_blank" class="amazon-button">View Live Amazon Listing</a>
+                <button class="print-button" onclick="window.print()">
+                    <i data-lucide="printer"></i>
+                    <span>Print / Save as PDF</span>
+                </button>
             </div>
         </div>
 
