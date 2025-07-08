@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seculife GPS Tracker - Sentiment & Thematic Analysis</title>
+    <style>
+        /* CSS Custom Properties for easy theming */
+        :root {
+            --primary-dark: #2c3e50; /* For headers, main text */
+            --secondary-blue: #3498db; /* For highlights, borders */
+            --accent-green: #27ae60; /* Positive sentiment color */
+            --accent-red: #e74c3c; /* Negative sentiment color */
+            --accent-grey: #95a5a6; /* Neutral sentiment color */
+            --background-light: #ecf0f1; /* Light background for the page */
+            --text-dark: #34495e; /* General text color */
+            --card-bg: #ffffff; /* Background for content sections */
+            --border-color: #dcdcdc; /* Subtle border color */
+            --quote-bg: #f8f8f8; /* Background for quote blocks */
+        }
+
+        /* Basic Body & Container Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            color: var(--primary-dark);
+            font-size: 2.8rem;
+            margin: 0;
+            letter-spacing: -0.05em;
+        }
+
+        header .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-top: 0.5rem;
+        }
+
+        /* Section Headings */
+        h2 {
+            color: var(--secondary-blue);
+            border-bottom: 2px solid var(--secondary-blue);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: var(--primary-dark);
+            font-size: 1.4rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Sentiment Overview Section */
+        .sentiment-overview {
+            display: flex;
+            justify-content: space-around;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+        }
+
+        .sentiment-item {
+            flex: 1;
+            min-width: 150px; /* Ensures minimum width for items */
+            text-align: center;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Specific borders for sentiment items */
+        .sentiment-item.positive { border: 1px solid var(--accent-green); }
+        .sentiment-item.negative { border: 1px solid var(--accent-red); }
+        .sentiment-item.neutral { border: 1px solid var(--accent-grey); }
+
+        .sentiment-item h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+        }
+
+        .sentiment-item p {
+            margin: 0;
+            font-size: 1rem;
+            color: var(--text-dark);
+        }
+
+        /* Sentiment Progress Bar Styling */
+        .sentiment-bar {
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 10px;
+            background-color: var(--border-color); /* Background for the track */
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Colored fill for the sentiment bars using pseudo-elements */
+        .sentiment-item.positive .sentiment-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-color: var(--accent-green);
+            width: var(--width, 0%); /* Custom property for dynamic width */
+            border-radius: 4px;
+        }
+        .sentiment-item.negative .sentiment-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-color: var(--accent-red);
+            width: var(--width, 0%);
+            border-radius: 4px;
+        }
+        .sentiment-item.neutral .sentiment-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-color: var(--accent-grey);
+            width: var(--width, 0%);
+            border-radius: 4px;
+        }
+
+        /* Thematic Analysis - Details/Summary (Interactive Sections) */
+        .thematic-analysis h3 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .theme-details {
+            background-color: var(--quote-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .theme-details summary {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--primary-dark);
+            cursor: pointer;
+            padding: 0.5rem 0;
+            outline: none; /* Removes default focus outline */
+            display: list-item; /* Ensures custom marker works */
+            list-style: none; /* Hide default browser marker */
+            position: relative;
+            padding-left: 1.5rem; /* Space for custom marker */
+        }
+
+        .theme-details summary::before {
+            content: '+'; /* Custom expand icon */
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2em;
+            color: var(--secondary-blue);
+            transition: transform 0.2s;
+        }
+
+        .theme-details[open] summary::before {
+            content: '-'; /* Custom collapse icon */
+        }
+
+        .theme-details ul {
+            list-style: none; /* Removes default bullet points */
+            padding-left: 0;
+            margin-top: 1rem;
+            border-top: 1px dashed var(--border-color);
+            padding-top: 1rem;
+        }
+
+        .theme-details ul li {
+            background-color: var(--card-bg);
+            border-left: 4px solid var(--secondary-blue); /* Left accent border */
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.75rem;
+            border-radius: 4px;
+            font-style: italic;
+            color: #555;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .theme-details ul li:last-child {
+            margin-bottom: 0; /* No margin after the last list item */
+        }
+
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--accent-grey);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            .container {
+                padding: 1rem;
+                border-radius: 0; /* Less aggressive on small screens */
+                box-shadow: none;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+            header .subtitle {
+                font-size: 1rem;
+            }
+            .sentiment-overview {
+                flex-direction: column;
+            }
+            .sentiment-item {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Seculife GPS Tracker</h1>
+            <p class="subtitle">Product Review Sentiment & Thematic Analysis</p>
+        </header>
+
+        <section class="summary-section">
+            <h2>Analysis Summary</h2>
+            <p>Based on 30 reviews, the Seculife GPS Tracker receives an overall positive sentiment, with a clear distribution between positive and negative feedback.</p>
+            <div class="sentiment-overview">
+                <div class="sentiment-item positive">
+                    <h3>Positive</h3>
+                    <p>21 Reviews (70%)</p>
+                    <div class="sentiment-bar" style="--width: 70%;"></div>
+                </div>
+                <div class="sentiment-item negative">
+                    <h3>Negative</h3>
+                    <p>9 Reviews (30%)</p>
+                    <div class="sentiment-bar" style="--width: 30%;"></div>
+                </div>
+                <div class="sentiment-item neutral">
+                    <h3>Neutral</h3>
+                    <p>0 Reviews (0%)</p>
+                    <div class="sentiment-bar" style="--width: 0%;"></div>
+                </div>
+            </div>
+            <p>The product's core value proposition of providing peace of mind through accurate GPS tracking, geofencing, and effective two-way communication (especially the auto-answer feature) is consistently highlighted as a major strength. However, significant dissatisfaction revolves around battery life and charging issues, cancellation fees and refund policies, as well as geographical compatibility limitations.</p>
+        </section>
+
+        <section class="thematic-analysis">
+            <h2>Detailed Thematic Analysis</h2>
+
+            <p>Click on each theme to expand and view illustrative quotes from the reviews.</p>
+
+            <h3>Predominantly Positive Themes</h3>
+            <details class="theme-details">
+                <summary>Ease of Setup & Activation</summary>
+                <ul>
+                    <li>"Easy to set up, I also got great help from the customer service department."</li>
+                    <li>"When the product arrived, it was easy to unpackage, charge, and activate."</li>
+                    <li>"Very easy to activate. Customer service team is good."</li>
+                    <li>"Very user friendly!!!"</li>
+                </ul>
+            </details>
+            <details class="theme-details">
+                <summary>Peace of Mind & Reassurance</summary>
+                <ul>
+                    <li>"This tracker gives me piece of mind that I can see where she is at when I am at work."</li>
+                    <li>"My kids find it reassuring that we are doing the best to keep my husband safe at home with me."</li>
+                    <li>"Overall I would highly recommend this device if you have elderly parents to look after and you need peace of mind their OK."</li>
+                    <li>"Great peace of mind with it."</li>
+                </ul>
+            </details>
+            <details class="theme-details">
+                <summary>GPS Tracking & Geofencing Accuracy</summary>
+                <ul>
+                    <li>"I am able to geofence the neighborhood and get notices when she goes of the geofence."</li>
+                    <li>"I like that the tracking is very accurate so I can check on him while I'm at work..."</li>
+                    <li>"Being able to see the GPS location and the battery level is great."</li>
+                </ul>
+            </details>
+            <details class="theme-details">
+                <summary>Two-Way Calling & Auto-Answer Feature</summary>
+                <ul>
+                    <li>"But my favorite feature is that I can call the tracker and I have it set to automatically answer so she doesnt have to look for a button to press."</li>
+                    <li>"Even with her bad hearing the audio quality was better than expected."</li>
+                    <li>"El poder salir de casa y saber que puedo estar en contacto con mi viejo es lo mas lindo... A él le encanta! Por que no tiene que tocar nada para contestar las llamadas."</li>
+                </ul>
+            </details>
+            <details class="theme-details">
+                <summary>Customer Service (Positive Experiences)</summary>
+                <ul>
+                    <li>"I also got great help from the customer service department."</li>
+                    <li>"Customer service team is good."</li>
+                </ul>
+            </details>
+            <details class="theme-details">
+                <summary>Overall Effectiveness & Functionality</summary>
+                <ul>
+                    <li>"While its not perfect, it has been a game changer for me, especially when I am at work."</li>
+                    <li>"Works well as a supplemental or primary call device for elderly."</li>
+                    <li>"Great product. I can leave home or just work in the garden and as long as I have my phone I will know that he has not fallen."</li>
+                </ul>
+            </details>
+
+            <h3>Predominantly Negative Themes</h3>
+            <details class="theme-details">
+                <summary>Battery Life & Charging Issues</summary>
+                <ul>
+                    <li>"battery life is lacking..."</li>
+                    <li>"The battery life was horrible."</li>
+                    <li>"The battery life just wasn’t going to cut it for my needs."</li>
+                    <li>"This item functions OK but has only one day battery life. The provided charger is almost worthless..."</li>
+                    <li>"Battery constantly needs charging!"</li>
+                </ul>
+            </details>
+            <details class="theme-details">
+                <summary>Cancellation Fees & Refund Policy</summary>
+                <ul>
+                    <li>"When you no longer want to use the device, they will charge you a $125 cancelation fee."</li>
+                    <li>"They were happy to turn off the service however they refused to issue a refund until I can show them PROOF that I returned the tracker."</li>
+                </ul>
+            </details>
+            <details class="theme-details">
+                <summary>Geographical Compatibility / Cell Coverage</summary>
+                <ul>
+                    <li>"doesn't work in the area where I wanted to use it... I was told there was no cell coverage in the area where I planned to use it."</li>
+                    <li>"Ne fonctionne pas au canada" ("This item does not work in Canada")</li>
+                    <li>"No es compatible en Mexico Este articulo NO sirve para Mexico pais. No dan el servicio." ("Not compatible in Mexico... They do not provide service.")</li>
+                </ul>
+            </details>
+            <details class="theme-details">
+                <summary>Customer Service (Negative Experiences)</summary>
+                <ul>
+                    <li>"When I called customer service I could hardly understand the person as he had a very heavy accent and he wasn’t very helpful."</li>
+                </ul>
+            </details>
+            <details class="theme-details">
+                <summary>Setup Difficulty</summary>
+                <ul>
+                    <li>"...it took me days to set it up. I am pretty savvy with electronics but this one was confusing."</li>
+                    <li>"Not at all easy to set up... But it was difficult to use."</li>
+                </ul>
+            </details>
+            <details class="theme-details">
+                <summary>Charger Quality / Compatibility</summary>
+                <ul>
+                    <li>"The provided charger is almost worthless..."</li>
+                    <li>"Like calling features dislike no compatibility charger"</li>
+                </ul>
+            </details>
+
+            <h3>Neutral / Mixed Mentions</h3>
+            <details class="theme-details">
+                <summary>Monthly Subscription/Fees</summary>
+                <ul>
+                    <li>"There is a monthly fee, and different levels depending on what your needs are."</li>
+                    <li>"It’s easy to set up with 2 plan options with reasonable prices."</li>
+                    <li>"Cost of the unit dousn't matter much, its the monthly fee. By the way they charge your credit card $5 every time it's activated."</li>
+                </ul>
+            </details>
+            <details class="theme-details">
+                <summary>Minor Operational Quirks</summary>
+                <ul>
+                    <li>"the time format is only is 24 hour, not 12 hour at this time."</li>
+                    <li>"Only down side was the directions to set up - they said there was no sim card included in the setup instructions, but there was when I started the setup process online."</li>
+                    <li>"Be aware this device is only for contacting emergency contacts such as family members and not for contacting 911 or other emergency services."</li>
+                </ul>
+            </details>
+        </section>
+        <footer>
+            <p>Analysis based on provided text data. This document does not store personal information or make real-world recommendations.</p>
+        </footer>
+    </div>
+</body>
+</html>
